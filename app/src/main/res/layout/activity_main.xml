@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+
     <data>
-         <variable name="user" type="com.winning.sharkchao.databinddemo.User"/>
         <variable
-            name="myClick"
-            type="android.view.View.OnClickListener"/>
+            name="user"
+            type="com.winning.sharkchao.databinddemo.User"/>
+        <variable
+            name="testListener"
+            type="com.winning.sharkchao.databinddemo.MainActivity.TestClickListener"/>
     </data>
-    <android.support.constraint.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="com.winning.sharkchao.databinddemo.MainActivity">
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"
             android:padding="10dp"
+            android:text="@{user.name}"
+            tools:text="user。name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-        <Button
+
+        <TextView
             android:id="@+id/tvAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.age}"
             android:padding="10dp"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="user.value"
+            android:text="@{user.age}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
             />
-
-    </android.support.constraint.ConstraintLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮点击事件"
+            android:onClick="@{() -> testListener.onClick()}"/>
+        <include
+            layout="@layout/activity_two"
+            bind:user="@{user}"/>
+        <Button
+            android:id="@+id/btnViewStub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="viewStub的使用"/>
+    </LinearLayout>
 
 </layout>
